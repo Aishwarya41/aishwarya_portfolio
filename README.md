@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aishwarya Joshi — Portfolio
 
-## Getting Started
+Pixel-art portfolio built with Next.js 16, TypeScript and Tailwind CSS v4.
 
-First, run the development server:
+## Setup
+
+Next.js 16 requires Node **20.9+**. The repo pins a version in `.nvmrc`:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+nvm use
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The site runs at http://localhost:3000.
 
-## Learn More
+## Contact form
 
-To learn more about Next.js, take a look at the following resources:
+The form posts to `app/api/contact/route.ts`, which sends through
+[Resend](https://resend.com). Copy `.env.example` to `.env.local` and add a key:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+RESEND_API_KEY=re_...
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Without a key the form still validates, but sending returns a 500 and the UI
+shows its error state. Resend sends from `onboarding@resend.dev` until you
+verify your own domain.
 
-## Deploy on Vercel
+Because the form needs a server runtime, this app cannot be deployed as a fully
+static export. Vercel and Netlify both work with no configuration.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Editing content
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Everything on the page is data. No component changes needed to add to it:
+
+| File | What it holds |
+| --- | --- |
+| `content/site.ts` | Name, intro, email, social links, nav items |
+| `content/education.ts` | Degree and highlights |
+| `content/experience.ts` | Jobs |
+| `content/projects.ts` | Projects, including the modal write-ups |
+| `content/artwork.ts` | Gallery — empty, so the section is hidden |
+
+## Pixel art
+
+Icons currently render from fallback grids defined in `lib/pixel.ts`. To use
+your own drawings:
+
+1. Export PNGs at native size (16×16 or 32×32) — do not upscale in the editor.
+2. Save them as `public/icons/{edu,work,code,art,mail}.png`.
+3. Add each one to the `ICON_SRC` map at the top of `components/PixelIcon.tsx`.
+
+Anything left out of that map keeps using its fallback grid, so you can migrate
+one icon at a time.
+
+On this cream background, icons want a dark outline (`#1f1c17`) with clay
+details (`#d4553d`) — the inverse of typical dark-mode pixel art. Set your
+editor's canvas background to `#faf6ee` to judge contrast correctly.
+
+## Design tokens
+
+The palette lives in one `@theme` block in `app/globals.css`. Changing the
+site's colors means editing that block and nothing else.
