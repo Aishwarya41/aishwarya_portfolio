@@ -22,7 +22,7 @@ export const jobs: Job[] = [
       {
         heading: "Software development",
         points: [
-          "Own and maintain the full portfolio of 30+ custom web applications used organization-wide, including managing package upgrades, dependency updates, and breaking-change remediation to ensure ongoing uptime and security compliance.",
+          "Own and maintain the full portfolio of 20+ custom web applications used organization-wide, including managing package upgrades, dependency updates, and breaking-change remediation to ensure ongoing uptime and security compliance.",
           "Led the modernization of two legacy WebForms tools, cutting security exposure and technical debt.",
         ],
       },

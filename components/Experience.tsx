@@ -1,18 +1,35 @@
+"use client";
+
+import { useSyncExternalStore } from "react";
 import { Card } from "./Card";
 import { Section } from "./Section";
 import { jobs } from "@/content/experience";
 
+// Read once at hydration, with no subscription on purpose: reacting to resize
+// would slam cards shut underneath someone who had just opened them.
+const neverChanges = () => () => {};
+const isWideNow = () => window.matchMedia("(min-width: 768px)").matches;
+const isWideOnServer = () => false;
+
 export function Experience() {
+  // Everything renders shut on the server and the current role opens itself
+  // only where there is room. This way round a phone never flashes an open
+  // card, and on a desktop the section is well below the fold by the time
+  // anyone scrolls to it.
+  const roomToExpand = useSyncExternalStore(
+    neverChanges,
+    isWideNow,
+    isWideOnServer,
+  );
+
   return (
     <Section id="experience" icon="work" title="EXPERIENCE">
       <div className="flex flex-col gap-4">
         {jobs.map((job, i) => (
           <Card key={`${job.company}-${job.dates}`}>
-            {/* Native <details> so this works without JavaScript and gets
-                keyboard handling and expanded/collapsed announcements free.
-                The current role starts open so the section is not just a
-                stack of shut drawers. */}
-            <details className="job" open={i === 0}>
+            {/* Native <details> so this gets keyboard handling and
+                expanded/collapsed announcements from the browser. */}
+            <details className="job" open={roomToExpand && i === 0}>
               <summary className="focus-visible:outline-accent-fill hover:bg-surface-alt flex cursor-pointer list-none items-start gap-4 p-5 focus-visible:outline-2 focus-visible:-outline-offset-2">
                 <div className="min-w-0 grow">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
