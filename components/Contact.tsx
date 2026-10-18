@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import Script from "next/script";
 import { Card } from "./Card";
 import { Section } from "./Section";
 import { contactSchema } from "@/lib/schema";
@@ -10,6 +11,18 @@ import { btnPrimary, btnSecondary } from "@/lib/ui";
 
 type Status = "idle" | "sending" | "sent" | "error";
 type Errors = Partial<Record<"name" | "email" | "message", string>>;
+
+// Cloudflare's documented always-passes test key, so the form works locally
+// before you have an account. Production refuses to send without a real one.
+const TEST_SITE_KEY = "1x00000000000000000000AA";
+const SITE_KEY =
+  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || TEST_SITE_KEY;
+
+declare global {
+  interface Window {
+    turnstile?: { reset: (container?: string | HTMLElement) => void };
+  }
+}
 
 const fieldClass =
   "bg-surface-alt border-ink-line text-ink placeholder:text-muted w-full border-2 px-3 py-2.5 text-[13px] " +
@@ -22,7 +35,12 @@ export function Contact() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
-    const data = Object.fromEntries(new FormData(form));
+    const formData = new FormData(form);
+    // Turnstile injects this hidden field into the surrounding form.
+    const turnstileToken = String(
+      formData.get("cf-turnstile-response") ?? "",
+    );
+    const data = Object.fromEntries(formData);
 
     const parsed = contactSchema.safeParse(data);
     if (!parsed.success) {
@@ -45,18 +63,25 @@ export function Contact() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(parsed.data),
+        body: JSON.stringify({ ...parsed.data, turnstileToken }),
       });
       if (!res.ok) throw new Error(`Request failed: ${res.status}`);
       setStatus("sent");
       form.reset();
     } catch {
       setStatus("error");
+    } finally {
+      // Turnstile tokens are single-use, so a second message needs a fresh one.
+      window.turnstile?.reset();
     }
   }
 
   return (
     <Section id="contact" icon="mail" title="CONTACT">
+      <Script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        strategy="afterInteractive"
+      />
       <Card className="flex flex-col gap-5 p-7">
         <p className="text-body text-sm leading-[1.7]">{site.contactBlurb}</p>
 
@@ -135,6 +160,14 @@ export function Contact() {
             <input id="website" name="website" type="text" tabIndex={-1} />
           </div>
 
+          {/* Cloudflare Turnstile. Usually resolves without the visitor doing
+              anything; it injects a cf-turnstile-response field into this form. */}
+          <div
+            className="cf-turnstile"
+            data-sitekey={SITE_KEY}
+            data-theme="light"
+          />
+
           <div className="flex flex-wrap items-center gap-3.5">
             <button
               type="submit"
@@ -146,7 +179,7 @@ export function Contact() {
 
             <p aria-live="polite" className="text-[12px]">
               {status === "sent" && (
-                <span className="text-body">Thanks — message sent.</span>
+                <span className="text-body">Thanks! Message sent.</span>
               )}
               {status === "error" && (
                 <span className="text-accent-text">

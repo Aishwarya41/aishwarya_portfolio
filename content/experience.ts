@@ -22,16 +22,16 @@ export const jobs: Job[] = [
       {
         heading: "Software development",
         points: [
-          "Architected 2+ full-stack C#/.NET Blazor applications.",
+          "Own and maintain the full portfolio of 30+ custom web applications used organization-wide, including managing package upgrades, dependency updates, and breaking-change remediation to ensure ongoing uptime and security compliance.",
           "Led the modernization of two legacy WebForms tools, cutting security exposure and technical debt.",
-          "Automated a manual file retrieval process, reducing the effort by 86%.",
         ],
       },
       // TODO: your Workday work at Van Andel — what you integrate, which
       // modules, what you automated. Replace these before publishing.
       {
         heading: "Workday",
-        points: [],
+        points: ["Built 3+ bidirectional Workday ERP integrations and cross-system data pipelines, enabling centralized data analytics and reporting across research and administrative business units.",
+        "Automated a manual file retrieval and delivery process using REST APIs, Workday Orchestrate, and document transformation, reducing manual effort by an estimated 86% and replacing a daily ~35-minute manual task."],
       },
     ],
   },
@@ -57,7 +57,7 @@ export const jobs: Job[] = [
     details: [
       {
         points: [
-          "Shipped React.js search, filtering and feature-toggle components for a portal used by 30+ developers.",
+          "Built and shipped front-end UI features including search, filtering, and feature-toggle components using React.js for an internal developer portal used by 30+ developers, translating user research and feedback into working functionality.",
           "Redesigned the UI and UX across 3 applications.",
         ],
       },
