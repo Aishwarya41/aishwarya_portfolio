@@ -22,16 +22,14 @@ export const jobs: Job[] = [
       {
         heading: "Software development",
         points: [
-          "Own and maintain the full portfolio of 20+ custom web applications used organization-wide, including managing package upgrades, dependency updates, and breaking-change remediation to ensure ongoing uptime and security compliance.",
-          "Led the modernization of two legacy WebForms tools, cutting security exposure and technical debt.",
+          "Own and maintain the full portfolio of 20+ custom web applications used organization-wide, ensuring ongoing uptime and security compliance.",
+          "Led modernization of legacy WebForms applications to a secure, maintainable .NET/Blazor/C#/Telerik stack, reducing security exposure and technical debt for research-critical tools.",
         ],
       },
-      // TODO: your Workday work at Van Andel — what you integrate, which
-      // modules, what you automated. Replace these before publishing.
       {
         heading: "Workday",
         points: ["Built 3+ bidirectional Workday ERP integrations and cross-system data pipelines, enabling centralized data analytics and reporting across research and administrative business units.",
-        "Automated a manual file retrieval and delivery process using REST APIs, Workday Orchestrate, and document transformation, reducing manual effort by an estimated 86% and replacing a daily ~35-minute manual task."],
+        "Automated a manual file retrieval and delivery process using REST APIs, Workday Orchestrate, and document transformation, reducing manual effort by an estimated 86%."],
       },
     ],
   },
@@ -39,21 +37,21 @@ export const jobs: Job[] = [
     role: "Integration Developer Intern",
     company: "Corewell Health",
     dates: "Jan – Dec 2024",
-    summary: "Keeping HR, Payroll and Finance systems talking to each other.",
+    summary: "",
     details: [
       {
         points: [
           "Resolved 5+ production integration incidents weekly across HR, Payroll and Finance systems.",
-          "Built 2 Workday EIB integrations for employee benefits data, including SFTP setup.",
+          "Built Workday EIB integrations for employee benefits data, including SFTP setup.",
         ],
       },
     ],
   },
   {
-    role: "Front-end Developer Intern",
+    role: "Web and Mobile Developer Intern",
     company: "Corewell Health",
     dates: "May – Aug 2023",
-    summary: "Front-end work on an internal developer portal.",
+    summary: "",
     details: [
       {
         points: [
@@ -67,11 +65,11 @@ export const jobs: Job[] = [
     role: "Web Developer",
     company: "Calvin University",
     dates: "Aug 2022 – Dec 2023",
-    summary: "Maintaining KnightCite, the university's citation tool.",
+    summary: "",
     details: [
       {
         points: [
-          "Developed and maintained KnightCite, a citation site with 550K users and 10M+ pageviews.",
+          "Enhanced and maintained KnightCite, a citation site with 550K users and 10M+ pageviews.",
           "Ran usability tests that surfaced accessibility fixes.",
         ],
       },

@@ -38,7 +38,7 @@ export const projects: Project[] = [
       "Full-stack lost-and-found app for a university campus. Led a team of five, with an Azure Blob Storage photo pipeline.",
     description: [
       "Calvin Finds is a lost-and-found app for a university campus: students post items they have found, search what others have posted, and claim what is theirs. The core problem is matching — a description alone is rarely enough to identify an object, so photos carry most of the signal.",
-      "I led a team of five through the build. The React Native client talks to an Express API backed by PostgreSQL, and uploaded photos go through a pipeline into Azure Blob Storage so images never sit in the database. Beyond the architecture, most of my time went to keeping five people productive in parallel: splitting the work along API boundaries, reviewing pull requests, and unblocking teammates.",
+      "The React Native client talks to an Express API backed by PostgreSQL, and uploaded photos go through a pipeline into Azure Blob Storage so images never sit in the database.",
     ],
     role: "Team lead, 5 engineers",
     timeframe: "2024",
@@ -54,8 +54,8 @@ export const projects: Project[] = [
     summary:
       "Online gallery where Calvin art students exhibit paintings, drawings, ceramics and photography, with a submission flow and per-artist pages.",
     description: [
-      "Palette is an online art gallery for Calvin art students: a place to exhibit original paintings, drawings, ceramics and photography, and to find work by others in the same community. Student art tends to live in a studio for a semester and then disappear — the gallery gives it somewhere permanent and public.",
-      "The app is Angular with Angular Material, backed by Firebase: Firestore for artwork and artist records, Cloud Storage for the images themselves, and Firebase Hosting for the deployed site. Work is browsed by medium — paintings, drawings, photography, ceramics — or by artist, and students submit new pieces through the site rather than by email.",
+      "Palette is an online art gallery for Calvin art students: a place to exhibit original paintings, drawings, ceramics and photography, and to find work by others in the same community. Student art tends to live in a studio for a semester and then disappear. So, the gallery gives it somewhere permanent and public.",
+      "The app is Angular with Angular Material, backed by Firebase: Firestore for artwork and artist records, Cloud Storage for the images themselves, and Firebase Hosting for the deployed site.",
     ],
     // Checked against the repo: your commits there are under a different
     // account to Swayam's. Rewrite this to match what you actually did.
@@ -90,7 +90,7 @@ export const projects: Project[] = [
     summary:
       "Netlog analytics engine built with UC San Diego researchers for the RABBITS broadband toolkit.",
     description: [
-      "Research work with UC San Diego on the RABBITS broadband measurement toolkit. Chrome's Netlog captures a dense, low-level record of everything the network stack does during a speed test — the question is what you can actually conclude from it.",
+      "Research work with UC San Diego on the RABBITS broadband measurement toolkit. Chrome's Netlog captures a dense, low-level record of everything the network stack does during a speed test. The question this project tried to answer is what you can actually conclude from it.",
       "I built the analytics engine that parses Netlog captures and derives measurements from them, so researchers could reason about real broadband performance rather than a single summary number.",
     ],
     role: "Research collaborator",
