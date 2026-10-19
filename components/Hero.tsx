@@ -10,7 +10,7 @@ const AVATAR_H = 300;
 
 function Avatar() {
   return (
-    <div className="relative w-20 md:w-40">
+    <div className="avatar-frame relative w-20 md:w-40">
       <Image
         src="/avatar.png"
         alt="Pixel-art portrait of Aishwarya"

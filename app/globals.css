@@ -220,6 +220,24 @@
       blink 6s steps(1, end) infinite 1.1s;
   }
 
+  /* Eyes shut for the first step, open for the second. */
+  @keyframes blink-hover {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* Hovering the portrait blinks it on demand. This replaces the ambient
+     animation for the duration, which also stops the two fighting over
+     opacity. Nothing moves on hover, so there is no jitter loop to worry
+     about. */
+  .avatar-frame:hover .avatar-blink {
+    animation: blink-hover 0.3s steps(1, end);
+  }
+
   @keyframes modal-in {
     from {
       opacity: 0;
