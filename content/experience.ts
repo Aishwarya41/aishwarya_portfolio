@@ -70,7 +70,7 @@ export const jobs: Job[] = [
       {
         points: [
           "Enhanced and maintained KnightCite, a citation site with 550K users and 10M+ pageviews.",
-          "Ran usability tests that surfaced accessibility fixes.",
+          "Ran usability tests that surfaced accessibility issues and deployed fixes.",
         ],
       },
     ],
